@@ -9,6 +9,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=user_db
+    networks:
+      - my_app_network
   
   my_backend:
     depends_on:
@@ -24,6 +26,8 @@ services:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=user_db
+    networks:
+      - my_app_network
 
   my_frontend:
     depends_on:
@@ -32,6 +36,11 @@ services:
     build: ./frontend
     ports:
       - "5173:5173"
+    networks:
+      - my_app_network
 
 volumes:
   mysql-vol: {}
+
+networks:
+  my_app_network: {}
