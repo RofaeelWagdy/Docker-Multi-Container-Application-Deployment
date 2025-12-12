@@ -18,7 +18,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ~/Downloads/:/app/data/
+      - ./downloads/:/app/data/
     environment:
       - DB_HOST=my_database
       - DB_USER=root
