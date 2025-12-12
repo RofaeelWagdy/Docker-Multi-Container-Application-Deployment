@@ -1,5 +1,5 @@
 services:
-  my_database_cont:
+  my_database:
     build: ./database
     restart: always
     ports:
@@ -10,9 +10,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=user_db
   
-  my_backend_cont:
+  my_backend:
     depends_on:
-      - my_database_cont
+      - my_database
     build: ./backend
     restart: always
     ports:
@@ -20,15 +20,15 @@ services:
     volumes:
       - ~/Downloads/:/app/data/
     environment:
-      - DB_HOST=my_database_cont
+      - DB_HOST=my_database
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=user_db
 
-  my_frontend_cont:
+  my_frontend:
     depends_on:
-      - my_backend_cont
-      - my_database_cont
+      - my_backend
+      - my_database
     build: ./frontend
     ports:
       - "5173:5173"
